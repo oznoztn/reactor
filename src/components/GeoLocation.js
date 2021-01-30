@@ -40,7 +40,7 @@ export default class GeoLocation extends React.Component{
         )
     }
 
-    render(){
+    renderContent(){
         if(!this.state.errorMessage && this.state.lat){
             return (
                 <div>
@@ -56,6 +56,12 @@ export default class GeoLocation extends React.Component{
             )
         }
         return <Loader message="Waiting for the consent"/>
+    }
+
+    render(){
+        return (
+            <>{ this.renderContent() }</>
+        )
     }
 }
 
