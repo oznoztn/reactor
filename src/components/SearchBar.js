@@ -30,3 +30,12 @@ export default class SearchBar extends React.Component {
         We can pass an arrow func directly to the prop itself:
             2) onChange={event => console.log(event.target.value)}
 */
+
+/*
+    The input element is an example of UNCONTROLLED element. 
+
+    Becase we don't know its value. We have to dive into the DOM in order to find out its value. 
+    This means the source of truth is inside the HTML document, not inside of our React component.
+    
+    In React we don't like to store information inside HTML elements.
+*/
