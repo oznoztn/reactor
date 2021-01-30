@@ -3,7 +3,7 @@ import React from 'react'
 export default class SearchBar extends React.Component {
     state = { searchTerm: '' }
 
-    onSubmitEvent = (e) => {
+    onSearchSubmit = (e) => {
         // You cannot define onSubmitEvent method as this: onSubmitEvent(e) { console.log(this.state.searchTerm); }
         // That approach will crash while executing the statement this.state.searchTerm
         // Because in that context, "this" doesn't refer to the component itself: it is undefined.
@@ -11,13 +11,15 @@ export default class SearchBar extends React.Component {
         //      TypeError: Cannot read property 'state' of undefined
 
         e.preventDefault();        
-        console.log(this.state.searchTerm);
+        console.log("User searched for: " + this.state.searchTerm);
+
+        this.props.onSearchSubmit(this.state.searchTerm)
     }
 
     render() {
         return (
             <div className="ui segment">
-                <form onSubmit={this.onSubmitEvent} className="ui form">
+                <form onSubmit={this.onSearchSubmit} className="ui form">
                     <div className="field">
                         <label>Search</label>
                         {/* Be careful not to invoke the event handler methods by putting (). */}
