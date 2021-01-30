@@ -55,7 +55,7 @@ export default class GeoLocation extends React.Component{
                 </div>
             )
         }
-        return <Loader/>
+        return <Loader message="Waiting for the consent"/>
     }
 }
 
