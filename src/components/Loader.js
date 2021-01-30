@@ -11,4 +11,10 @@ const Loader = (props) => {
     )
 }
 
+// Much better approach than {props.message || "Loading" } 
+Loader.defaultProps = {
+    message: "Loading.."
+}
+
+
 export default Loader
