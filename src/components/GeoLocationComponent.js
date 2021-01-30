@@ -8,24 +8,36 @@ export default class GeoLocation extends React.Component{
 
         // THIS IS THE ONLY TIME WE DO DIRECT ASSIGNMENT TO THIS.STATE
         this.state = {
-            latitude: null,
-            altitude: null,
+            lat: null,
             errorMessage: null
         }
 
         window.navigator.geolocation.getCurrentPosition(
-            successCallback => this.setState({ latitude: successCallback.coords.latitude }),
+            successCallback => {
+                this.setState({ 
+                    lat: successCallback.coords.latitude,
+                    errorMessage: null })
+            },
             errorCallback => this.setState({ errorMessage: errorCallback.message})
         )
     }
 
     render(){
-        return (
-            <div>
-                <p>Latitude: { this.state.latitude }</p>
-                <p>Error: { this.state.errorMessage }</p>
-            </div>
-        )
+        if(!this.state.errorMessage && this.state.lat){
+            return (
+                <div>
+                    <p>Latitude: { this.state.lat }</p>
+                </div>
+            )
+        }
+        if(this.state.errorMessage && !this.state.lat){
+            return (
+                <div>
+                    <p>Error: { this.state.errorMessage }</p>
+                </div>
+            )
+        }
+        return <div>Loading...</div>
     }
 }
 
