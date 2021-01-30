@@ -1,4 +1,5 @@
 import React from 'react'
+import SeasonDisplay from './SeasonDisplay'
 
 export default class GeoLocation extends React.Component{
     /*
@@ -42,7 +43,7 @@ export default class GeoLocation extends React.Component{
         if(!this.state.errorMessage && this.state.lat){
             return (
                 <div>
-                    <p>Latitude: { this.state.lat }</p>
+                    <SeasonDisplay lat={this.state.lat} />
                 </div>
             )
         }
