@@ -1,4 +1,5 @@
 import React from 'react'
+import Loader from './Loader'
 import SeasonDisplay from './SeasonDisplay'
 
 export default class GeoLocation extends React.Component{
@@ -54,7 +55,7 @@ export default class GeoLocation extends React.Component{
                 </div>
             )
         }
-        return <div>Loading...</div>
+        return <Loader/>
     }
 }
 
