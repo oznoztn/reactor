@@ -1,23 +1,23 @@
-import React from 'react'
-import unsplash from '../api/unsplash'
-import { ImageList } from './ImageList'
-import SearchBar from './SearchBar'
+import React from 'react';
+import unsplash from '../api/unsplash';
+import { ImageList } from './ImageList';
+import SearchBar from './SearchBar';
 
 export default class SearchApp extends React.Component {
-    state = { images: [] }
+    state = { images: [] };
     
     onSearchSubmit = async (searchTerm) => {
-        console.log("The searchTerm caught at SearchApp level is: " + searchTerm)
+        console.log("The searchTerm caught at SearchApp level is: " + searchTerm);
 
         const response = await unsplash.get('/search/photos', {
             params: { 
                 query: searchTerm
             }
-        })
+        });
         
-        console.log(response.data.results)
+        console.log(response.data.results);
 
-        this.setState({images: response.data.results})
+        this.setState({images: response.data.results});
     }
 
     render() {

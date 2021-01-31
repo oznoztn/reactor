@@ -1,6 +1,6 @@
-import React from 'react'
-import Loader from './Loader'
-import SeasonDisplay from './SeasonDisplay'
+import React from 'react';
+import Loader from './Loader';
+import SeasonDisplay from './SeasonDisplay';
 
 export default class GeoLocation extends React.Component{
     /*
@@ -23,7 +23,7 @@ export default class GeoLocation extends React.Component{
     // To init the state object, we actually don't need to override the ctor.
     // There's a simpler way:
     // Babel transforms this line of code into the verbose one that we did previously.
-    state = { lat: null, errorMessage: null }
+    state = { lat: null, errorMessage: null };
 
     componentDidMount(){
         // This lifecycle method is only called for once, after the render method is called.
@@ -37,7 +37,7 @@ export default class GeoLocation extends React.Component{
                     errorMessage: null })
             },
             errorCallback => this.setState({ errorMessage: errorCallback.message})
-        )
+        );
     }
 
     renderContent(){

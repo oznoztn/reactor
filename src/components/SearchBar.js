@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 export default class SearchBar extends React.Component {
-    state = { searchTerm: '' }
+    state = { searchTerm: '' };
 
     onSearchSubmit = (e) => {
         // You cannot define onSubmitEvent method as this: onSubmitEvent(e) { console.log(this.state.searchTerm); }
@@ -13,7 +13,7 @@ export default class SearchBar extends React.Component {
         e.preventDefault();        
         console.log("User searched for: " + this.state.searchTerm);
 
-        this.props.onSearchSubmit(this.state.searchTerm)
+        this.props.onSearchSubmit(this.state.searchTerm);
     }
 
     render() {
