@@ -1,16 +1,14 @@
+import './ImageList.css'
 import React from 'react'
+import ImageCard from './ImageCard'
 
 export const ImageList = (props) => {
     var images = props.images.map(image => {
-        return (
-            <a href={image.urls.regular} target="_blank">
-                <img key={image.id} src={image.urls.small} alt={image.description} />
-            </a>
-        )
+        return <ImageCard image={image}/>
     })
     return (
         <div>
-            <div>
+            <div className="image-list">
                 {images}                           
             </div>    
             { images.length == 0 ? null : <h5>{images.length} images found.</h5> }
