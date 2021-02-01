@@ -29,8 +29,8 @@ class WidgetsApp extends React.Component{
                 <SearchWidget/>
                 
                 <br/>
-                <div class="ui horizontal divider"><h2>Accordion Widget</h2></div>
-                
+                <div className="ui horizontal divider"><h2>Accordion Widget</h2></div>
+
                 <Accordion items={favGames}/>
             </div>
         )
