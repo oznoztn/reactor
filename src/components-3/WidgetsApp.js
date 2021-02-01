@@ -21,7 +21,7 @@ const favGames = [
 
 ]
 
-class AccordionApp extends React.Component{
+class WidgetsApp extends React.Component{
     render(){
         return (
             <div>
@@ -31,4 +31,4 @@ class AccordionApp extends React.Component{
     }
 }
 
-export default AccordionApp
+export default WidgetsApp
