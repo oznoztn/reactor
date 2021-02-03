@@ -22,19 +22,15 @@ const favGames = [
 
 ]
 
-class WidgetsApp extends React.Component{
-    render(){
-        return (
-            <div>
-                <SearchWidget/>
-                
-                <br/>
-                <div className="ui horizontal divider"><h2>Accordion Widget</h2></div>
+export default () => {
+    return (
+        <div>
+            <SearchWidget/>
+            
+            <br/>
+            <div className="ui horizontal divider"><h2>Accordion Widget</h2></div>
 
-                <Accordion items={favGames}/>
-            </div>
-        )
-    }
+            <Accordion items={favGames}/>
+        </div>
+    )
 }
-
-export default WidgetsApp
