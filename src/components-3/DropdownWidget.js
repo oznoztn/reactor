@@ -1,7 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 const DropdownWidget = ({options, selected, selectText, onSelectedChange}) => {
   const [isOpen, setOpen] = useState(false);
+  const selectDivRef = useRef();
+
+  // It runs just for once, when the component is rendered
+  useEffect(() => {
+    // React'a ait olmayan event'ler her zaman önce çalışır.
+    
+    // Doğal olarak en alttan en üste eventin yayılacağını düşünebilirsin 
+    //    option > div > body
+    // Fakat burada böyle bir durum söz konusu değil. Olay sırası şu:
+    //    (dom) (1) body > (react) (1) option > (2) div
+    document.body.addEventListener('click', (e) =>{
+      // tetikleyen element söz konusu komponentin içerisinde mi?
+      if(selectDivRef.current.contains(e.target)){
+        // Evet.
+        return;
+      }
+
+      setOpen(false);
+    });
+  }, [])
 
   var sortedOptions = options.sort(t => t.title).reverse();
   var renderedOptions = sortedOptions.map((option) => {
@@ -23,7 +43,7 @@ const DropdownWidget = ({options, selected, selectText, onSelectedChange}) => {
 
   return (    
     <React.Fragment>
-      <div className="ui form">
+      <div ref={selectDivRef} className="ui form">
         <div className="field">
           <label className="label">{selectText}</label>
           <div onClick={() => setOpen(!isOpen)} className={`ui selection dropdown ${isOpen ? 'visible active' : ''}`}>
