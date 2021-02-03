@@ -29,17 +29,20 @@ const favGames = [
 
 export default () => {
     const [selected, setSelected] = useState(favGames[0]);
+    const [showDropdown, setShowDropdown] = useState(true);
 
     return (
         <div>
             <div className="ui horizontal divider"><h2>Dropdown Widget</h2></div>
 
-            <DropdownWidget 
-                options={favGames} 
-                selected={selected}                
-                selectText="Select a video game" 
-                onSelectedChange={setSelected}
-            />
+            <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+            {showDropdown ? 
+                <DropdownWidget 
+                    options={favGames} 
+                    selected={selected}                
+                    selectText="Select a video game" 
+                    onSelectedChange={setSelected}
+                /> : null}
             
             <div className="ui horizontal divider"><h2>Search Widget</h2></div>
 

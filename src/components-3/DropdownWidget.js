@@ -2,6 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 
 const DropdownWidget = ({options, selected, selectText, onSelectedChange}) => {
   const [isOpen, setOpen] = useState(false);
+
+  // Komponent dispose edildiğinde (DOM'dan kaldırıldığında) ref.current objesi NULL set edilecektir.
+  // Fakat body üzerinde click için tanımladığımız event listener halen yaşamaya devam edecektir!
+  // Bu nedenle event halen tetiklenmeye devam edecek ve null olan şeye erişmeye çalışacak!
+  // Dolayısıyla selectDivRef.current'a erişmeden önce daima null-check yap.
   const selectDivRef = useRef();
 
   // It runs just for once, when the component is rendered
@@ -14,7 +19,7 @@ const DropdownWidget = ({options, selected, selectText, onSelectedChange}) => {
     //    (dom) (1) body > (react) (1) option > (2) div
     document.body.addEventListener('click', (e) =>{
       // tetikleyen element söz konusu komponentin içerisinde mi?
-      if(selectDivRef.current.contains(e.target)){
+      if(selectDivRef.current && selectDivRef.current.contains(e.target)){
         // Evet.
         return;
       }
