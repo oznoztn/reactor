@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 
 const Loader = (props) => {
-    return (
-        <div>
-            <div className="ui active inverted dimmer">
-                <div className="ui text loader">{props.message}</div>
-            </div>
-            <p></p>
-        </div>
-    )
-}
+  return (
+    <div>
+      <div className="ui active inverted dimmer">
+        <div className="ui text loader">{props.message}</div>
+      </div>
+      <p></p>
+    </div>
+  );
+};
 
-// Much better approach than {props.message || "Loading" } 
+// Much better approach than {props.message || "Loading" }
 Loader.defaultProps = {
-    message: "Loading.."
-}
+  message: "Loading..",
+};
 
-
-export default Loader
+export default Loader;

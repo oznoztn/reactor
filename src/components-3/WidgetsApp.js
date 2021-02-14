@@ -1,57 +1,65 @@
-import React, {useState} from 'react'
-import Accordion from './Accordion'
-import DropdownWidget from './DropdownWidget'
-import SearchWidget from './SearchWidget'
+import React, { useState } from "react";
+import Accordion from "./Accordion";
+import DropdownWidget from "./DropdownWidget";
+import SearchWidget from "./SearchWidget";
 
 const favGames = [
-    {
-        "id": 1,
-        "title": "SimCity 4",
-        "content": "Simulation, City Building",
-    },
-    {
-        "id": 2,
-        "title": "Red Alert 2",
-        "content": "Real Time Strategy"
-    },
-    {
-        "id": 3,
-        "title": "Civilization V",
-        "content": "Turn Based Strategy"
-    },
-    {
-        "id": 4,
-        "title": "Anno 1404",
-        "content": "Simulation, City Building, Real Time Strategy"
-    },
-
-]
+  {
+    id: 1,
+    title: "SimCity 4",
+    content: "Simulation, City Building",
+  },
+  {
+    id: 2,
+    title: "Red Alert 2",
+    content: "Real Time Strategy",
+  },
+  {
+    id: 3,
+    title: "Civilization V",
+    content: "Turn Based Strategy",
+  },
+  {
+    id: 4,
+    title: "Anno 1404",
+    content: "Simulation, City Building, Real Time Strategy",
+  },
+];
 
 export default () => {
-    const [selected, setSelected] = useState(favGames[0]);
-    const [showDropdown, setShowDropdown] = useState(true);
+  const [selected, setSelected] = useState(favGames[0]);
+  const [showDropdown, setShowDropdown] = useState(true);
 
-    return (
-        <div>
-            <div className="ui horizontal divider"><h2>Dropdown Widget</h2></div>
+  return (
+    <div>
+      <div className="ui horizontal divider">
+        <h2>Dropdown Widget</h2>
+      </div>
 
-            <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-            {showDropdown ? 
-                <DropdownWidget 
-                    options={favGames} 
-                    selected={selected}                
-                    selectText="Select a video game" 
-                    onSelectedChange={setSelected}
-                /> : null}
-            
-            <div className="ui horizontal divider"><h2>Search Widget</h2></div>
+      <button onClick={() => setShowDropdown(!showDropdown)}>
+        Toggle Dropdown
+      </button>
+      {showDropdown ? (
+        <DropdownWidget
+          options={favGames}
+          selected={selected}
+          selectText="Select a video game"
+          onSelectedChange={setSelected}
+        />
+      ) : null}
 
-            <SearchWidget/>
-            
-            <br/>
-            <div className="ui horizontal divider"><h2>Accordion Widget</h2></div>
+      <div className="ui horizontal divider">
+        <h2>Search Widget</h2>
+      </div>
 
-            <Accordion items={favGames}/>
-        </div>
-    )
-}
+      <SearchWidget />
+
+      <br />
+      <div className="ui horizontal divider">
+        <h2>Accordion Widget</h2>
+      </div>
+
+      <Accordion items={favGames} />
+    </div>
+  );
+};

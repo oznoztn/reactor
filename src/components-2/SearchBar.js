@@ -1,39 +1,40 @@
-import React from 'react';
+import React from "react";
 
 export default class SearchBar extends React.Component {
-    state = { searchTerm: '' };
+  state = { searchTerm: "" };
 
-    onSearchSubmit = (e) => {
-        // You cannot define onSubmitEvent method as this: onSubmitEvent(e) { console.log(this.state.searchTerm); }
-        // That approach will crash while executing the statement this.state.searchTerm
-        // Because in that context, "this" doesn't refer to the component itself: it is undefined.
-        // You would try to access 'state' of undefined.
-        //      TypeError: Cannot read property 'state' of undefined
+  onSearchSubmit = (e) => {
+    // You cannot define onSubmitEvent method as this: onSubmitEvent(e) { console.log(this.state.searchTerm); }
+    // That approach will crash while executing the statement this.state.searchTerm
+    // Because in that context, "this" doesn't refer to the component itself: it is undefined.
+    // You would try to access 'state' of undefined.
+    //      TypeError: Cannot read property 'state' of undefined
 
-        e.preventDefault();        
-        console.log("User searched for: " + this.state.searchTerm);
+    e.preventDefault();
+    console.log("User searched for: " + this.state.searchTerm);
 
-        this.props.onSearchSubmit(this.state.searchTerm);
-    }
+    this.props.onSearchSubmit(this.state.searchTerm);
+  };
 
-    render() {
-        return (
-            <div className="ui segment">
-                <form onSubmit={this.onSearchSubmit} className="ui form">
-                    <div className="field">
-                        <label>Search</label>
-                        {/* Be careful not to invoke the event handler methods by putting (). */}
-                        <input 
-                            type="text" 
-                            value={this.state.searchTerm} 
-                            onChange={e => this.setState({searchTerm: e.target.value})} />
-                    </div>
-                    
-                    {/* <button className="ui button" type="submit">Submit</button> */}
-                </form>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="ui segment">
+        {/* Be careful not to invoke the event handler methods by putting (). */}
+        <form onSubmit={this.onSearchSubmit} className="ui form">
+          <div className="field">
+            <label>Search</label>
+            <input
+              type="text"
+              value={this.state.searchTerm}
+              onChange={(e) => this.setState({ searchTerm: e.target.value })}
+            />
+          </div>
+
+          {/* <button className="ui button" type="submit">Submit</button> */}
+        </form>
+      </div>
+    );
+  }
 }
 
 /*

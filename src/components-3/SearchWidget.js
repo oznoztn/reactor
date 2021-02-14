@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const SearchWidget = () => {
-  const [term, setTerm] = useState('programming');
+  const [term, setTerm] = useState("programming");
   const [results, setResults] = useState([]);
 
   useEffect(() => {
     const search = async () => {
-      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+      const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
         params: {
-          action: 'query',
-          list: 'search',
-          origin: '*',
-          format: 'json',
+          action: "query",
+          list: "search",
+          origin: "*",
+          format: "json",
           srsearch: term,
         },
       });
@@ -32,12 +32,12 @@ const SearchWidget = () => {
     // Fakat, dikkat et, useEffect içerisindeki mantık çalışmadan önce çalıştırılacak.
 
     // Diğer bir ifadeyle döndürülen bu metot hep bir sonraki useEffect tetiklenmesinden önce çalışıyor olacak.
-    
+
     // .... Döngü bu şekilde ilerliyor.
     return () => {
       // canceling the last timer:
-      clearTimeout(timeoutHandlerId)
-    }
+      clearTimeout(timeoutHandlerId);
+    };
   }, [term]);
 
   const renderedResults = results.map((result) => {

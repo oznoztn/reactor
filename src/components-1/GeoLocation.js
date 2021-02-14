@@ -1,9 +1,9 @@
-import React from 'react';
-import Loader from './Loader';
-import SeasonDisplay from './SeasonDisplay';
+import React from "react";
+import Loader from "./Loader";
+import SeasonDisplay from "./SeasonDisplay";
 
-export default class GeoLocation extends React.Component{
-    /*
+export default class GeoLocation extends React.Component {
+  /*
             //USING THE COMPONENT STATE
 
     // CTOR ALWAYS GETS PROPS OBJ
@@ -20,48 +20,46 @@ export default class GeoLocation extends React.Component{
 
     */
 
-    // To init the state object, we actually don't need to override the ctor.
-    // There's a simpler way:
-    // Babel transforms this line of code into the verbose one that we did previously.
-    state = { lat: null, errorMessage: null };
+  // To init the state object, we actually don't need to override the ctor.
+  // There's a simpler way:
+  // Babel transforms this line of code into the verbose one that we did previously.
+  state = { lat: null, errorMessage: null };
 
-    componentDidMount(){
-        // This lifecycle method is only called for once, after the render method is called.
-        // setState() instruction triggers this.
+  componentDidMount() {
+    // This lifecycle method is only called for once, after the render method is called.
+    // setState() instruction triggers this.
 
-        // By conventional we should componentDidMount to load data, not the constructor.
-        window.navigator.geolocation.getCurrentPosition(
-            successCallback => {
-                this.setState({ 
-                    lat: successCallback.coords.latitude,
-                    errorMessage: null })
-            },
-            errorCallback => this.setState({ errorMessage: errorCallback.message})
-        );
+    // By conventional we should componentDidMount to load data, not the constructor.
+    window.navigator.geolocation.getCurrentPosition(
+      (successCallback) => {
+        this.setState({
+          lat: successCallback.coords.latitude,
+          errorMessage: null,
+        });
+      },
+      (errorCallback) => this.setState({ errorMessage: errorCallback.message })
+    );
+  }
+
+  renderContent() {
+    if (!this.state.errorMessage && this.state.lat) {
+      return (
+        <div>
+          <SeasonDisplay lat={this.state.lat} />
+        </div>
+      );
     }
-
-    renderContent(){
-        if(!this.state.errorMessage && this.state.lat){
-            return (
-                <div>
-                    <SeasonDisplay lat={this.state.lat} />
-                </div>
-            )
-        }
-        if(this.state.errorMessage && !this.state.lat){
-            return (
-                <div>
-                    <p>Error: { this.state.errorMessage }</p>
-                </div>
-            )
-        }
-        return <Loader message="Waiting for the consent"/>
+    if (this.state.errorMessage && !this.state.lat) {
+      return (
+        <div>
+          <p>Error: {this.state.errorMessage}</p>
+        </div>
+      );
     }
+    return <Loader message="Waiting for the consent" />;
+  }
 
-    render(){
-        return (
-            <>{ this.renderContent() }</>
-        )
-    }
+  render() {
+    return <>{this.renderContent()}</>;
+  }
 }
-
