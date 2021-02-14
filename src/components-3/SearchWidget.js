@@ -3,7 +3,24 @@ import axios from "axios";
 
 const SearchWidget = () => {
   const [term, setTerm] = useState("programming");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    return () => {
+      // useEffect tarafından döndürülen bu metotta CLEANUP işlemleri yapılır.
+      // İlk tetikleme sonucunda dündürülecek olan bu metot, bir sonraki (2.) useEffect tetiklenmesinde çalışacak.
+      // Fakat, dikkat et, useEffect içerisindeki mantık çalışmadan önce çalıştırılacak.
+      // Diğer bir ifadeyle döndürülen bu metot hep bir sonraki useEffect tetiklenmesinden önce çalışıyor olacak.
+      // .... Döngü bu şekilde ilerliyor.
+
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -13,32 +30,14 @@ const SearchWidget = () => {
           list: "search",
           origin: "*",
           format: "json",
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
 
       setResults(data.query.search);
     };
-
-    const timeoutHandlerId = setTimeout(() => {
-      if (term) {
-        search();
-      }
-    }, 750);
-
-    // useEffect tarafından döndürülen bu metotta CLEANUP işlemleri yapılır.
-
-    // İlk tetikleme sonucunda dündürülecek olan bu metot, bir sonraki (2.) useEffect tetiklenmesinde çalışacak.
-    // Fakat, dikkat et, useEffect içerisindeki mantık çalışmadan önce çalıştırılacak.
-
-    // Diğer bir ifadeyle döndürülen bu metot hep bir sonraki useEffect tetiklenmesinden önce çalışıyor olacak.
-
-    // .... Döngü bu şekilde ilerliyor.
-    return () => {
-      // canceling the last timer:
-      clearTimeout(timeoutHandlerId);
-    };
-  }, [term]);
+    search();
+  }, [debouncedTerm]);
 
   const renderedResults = results.map((result) => {
     return (
